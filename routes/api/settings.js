@@ -1,8 +1,7 @@
 const express = require('express')
   , router = express.Router()
+  , settings = require('../../controllers/settings.controller')
 
-router.get('/', (req, res) => {
-  res.send(200)
-})
+router.get('/', settings.test)
 
 module.exports = router
