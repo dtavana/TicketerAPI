@@ -8,6 +8,7 @@ function init() {
         console.log("error",err);
         return err;
     });
+    return db;
 }
 
 module.exports = init();

@@ -16,12 +16,13 @@ const db = pgp(process.env.CONNECTION_STRING);
 function init() {
     db.connect()
         .then(obj=>{
-            console.log('success!!!');
+            console.log('Postgres Connected');
             obj.done();
         })
         .catch(err=>{
-            console.log('error');
+            console.log('Postgres Error Connecting');
         }) 
+    return db;
 }
 
 module.exports = init();
