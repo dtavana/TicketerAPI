@@ -5,6 +5,7 @@ const settings = require('../../controllers/settings.controller')
 
 router.get('/', settings.getAllSettings)
 router.post('/prefix', settings.setPrefix)
+router.post('/currentticket', settings.setCurrentTicket)
 router.post('/logchannel', settings.setLogChannel)
 router.post('/transcriptchannel', settings.setTranscriptChannel)
 router.post('/ticketchannel', settings.setTicketChannel)

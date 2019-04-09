@@ -26,6 +26,14 @@ module.exports = {
         let result = await redis.hset(guildid, "prefix", prefix)
         return res.status(200).json({"SUCCESS": `Prefix has been set to '${prefix}'`});
     },
+    setCurrentTicket: async(req, res) => {
+        let guildid = req.body.guildid;
+        if(guildid === undefined) {
+            return res.status(400).json({"ERROR": `No guildid in body`})
+        }
+        await redis.hset(guildid, "currentticket", 0)
+        return res.status(200).json({"SUCCESS": `Current Ticket has been set to '0'`});
+    },
     setLogChannel: async(req, res) => {
         let guildid = req.body.guildid;
         let logchannel = req.body.logchannel;

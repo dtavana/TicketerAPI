@@ -11,7 +11,7 @@ const initializationOptions = {
     }
 }
 const pgp = require('pg-promise')(initializationOptions);
-const db = pgp(process.env.CONNECTION_STRING);
+const db = pgp(process.env.PG_CONNECTION_STRING);
 
 function init() {
     db.connect()
