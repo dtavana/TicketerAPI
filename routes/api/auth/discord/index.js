@@ -4,6 +4,14 @@ const passport = require('passport');
 const DiscordStrategy = require('passport-discord').Strategy;
 const User = require('../../../../models/user')
 
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
+
 passport.use(new DiscordStrategy({
     clientID: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
@@ -13,21 +21,16 @@ passport.use(new DiscordStrategy({
   function (accessToken, refreshToken, profile, cb) {
   
     console.log(profile)
-    return cb(profile, null)
-    // TODO: Associate the returned discord profile with a record in the database
-    /*     User.findOrCreate({
-          discordId: profile.id
-        }, function (err, user) {
-          return cb(err, user);
-        }); */
+    process.nextTick(function() {
+      return cb(null, profile);
+    });
   }));
 
 router.get('/', passport.authenticate('discord'))
 router.get('/return', passport.authenticate('discord', {
     failureRedirect: '/api/auth/discord'
-}), function (req, res, next) {
-    console.log("got here")
-    next()
+}), function (req, res) {
+  res.redirect(req.originalUrl)
 });
 
 module.exports = router

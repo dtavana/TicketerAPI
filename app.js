@@ -5,11 +5,14 @@ const express = require('express'),
   passport = require('passport'),
   DiscordStrategy = require('passport-discord').Strategy;
 
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
   extended: true
 }))
 
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(require('./routes'))
 
 app.listen(port, () => console.log(`Listening on port ${port}`))
