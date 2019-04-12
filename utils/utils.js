@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 module.exports= {
-    ensureAuthenticated: function(req, res, next) {
+    ensureAuthenticated: function(req, res, next) => {
         if (req.isAuthenticated()) { 
           return next(); 
         }
@@ -7,5 +9,13 @@ module.exports= {
           res.redirect('/api/auth/discord');
         }
         
+    },
+    checkSecret: function(req, res, next) => {
+      if(req.headers.authorization == process.env.SECRET) {
+        next();
       }
+      else {
+        res.end();
+      }
+    }
 }
