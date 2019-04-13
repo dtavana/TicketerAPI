@@ -1,8 +1,14 @@
 require('dotenv').config();
+const uuidv1 = require('uuid/v1');
 
 module.exports= {
+    generateKey: () => {
+      let key = uuidv1();
+      return key;
+    },
     ensureAuthenticated: function(req, res, next) {
-        if (req.isAuthenticated()) { 
+      req.session.body = req.body;
+      if (req.isAuthenticated()) { 
           return next(); 
         }
         else {
@@ -15,7 +21,7 @@ module.exports= {
         next();
       }
       else {
-        res.end();
+        res.status(400).end("msg: Invalid secret");
       }
     }
 }

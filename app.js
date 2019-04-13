@@ -3,7 +3,10 @@ const express = require('express'),
   bodyParser = require('body-parser'),
   port = process.env.PORT || 3000,
   passport = require('passport'),
-  DiscordStrategy = require('passport-discord').Strategy;
+  DiscordStrategy = require('passport-discord').Strategy,
+  session = require('express-session');
+
+require('dotenv').config();
 
 
 app.use(bodyParser.json())
@@ -11,6 +14,11 @@ app.use(bodyParser.urlencoded({
   extended: true
 }))
 
+app.use(session({
+  secret: process.env.SECRET,
+  resave: true,
+  saveUninitialized: false
+}))
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(require('./routes'))
