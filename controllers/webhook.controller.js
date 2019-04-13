@@ -1,4 +1,4 @@
-var redis = require('./redis');
+var redis = require('./publish');
 var pg = require('./postgres');
 require('dotenv').config();
 
@@ -13,19 +13,20 @@ module.exports = {
             res.status(200).send({msg: "Done"})
         }
         else {
-            res.status(400).send(msg: "Invalid type");
+            res.status(400).send({msg: "Invalid type"});
         }
     },
     handlePremium: async(req, res) => {
+        var data;
         if(req.body.status == "completed") {
-            let data = {
+            data = {
                 "userId": req.body.buyer_id,
                 "added": true,
                 "paymentId": req.body.txn_id,
             };
         }
         else {
-            let data = {
+            data = {
                 "userId": req.body.buyer_id,
                 "added": false,
                 "paymentId": req.body.txn_id,

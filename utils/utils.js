@@ -1,7 +1,7 @@
 require('dotenv').config();
 
 module.exports= {
-    ensureAuthenticated: function(req, res, next) => {
+    ensureAuthenticated: function(req, res, next) {
         if (req.isAuthenticated()) { 
           return next(); 
         }
@@ -10,7 +10,7 @@ module.exports= {
         }
         
     },
-    checkSecret: function(req, res, next) => {
+    checkSecret: function(req, res, next) {
       if(req.headers.authorization == process.env.SECRET) {
         next();
       }
