@@ -1,5 +1,5 @@
 var redis = require('./redis');
-var pg = require('./postgres');
+//var pg = require('./postgres');
 
 module.exports = {
     getAllSettings: async(req, res) => {
