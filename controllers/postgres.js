@@ -11,7 +11,13 @@ const initializationOptions = {
     }
 }
 const pgp = require('pg-promise')(initializationOptions);
-const db = pgp(process.env.PG_CONNECTION_STRING);
+const db = pgp({
+    host: process.env.PG_HOST,
+    port: 5432,
+    database: process.env.PG_DATABASE,
+    user: process.env.PG_USER,
+    password: process.env.PG_PASSWORD
+});
 
 function init() {
     db.connect()
