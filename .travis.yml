@@ -4,6 +4,7 @@ node_js:
   - "lts/*"
 services:
   - postgresql
+  - redis-server
   
 before_script:
   - npm install
