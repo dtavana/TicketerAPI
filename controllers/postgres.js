@@ -1,7 +1,7 @@
 require('dotenv').config();
 const initializationOptions = {
     error(err,e) {
-        if(e.cn) console.log('connection error',error.message);
+        if(e.cn) console.log('connection error',e.message);
         if(e.query){
             console.log('query wahala',e.query);
             if(e.params) console.log('query error',e.params);
