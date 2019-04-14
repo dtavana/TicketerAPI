@@ -16,26 +16,23 @@ module.exports = {
 
         }
         else {
-            res.status(400).send({msg: "Invalid type"});
+            res.status(400).send({msg: "Invalid userId entered"});
         }
     },
     getTicketContent: async(req, res) => {
-        var data;
-        if(req.body.status == "completed") {
-            data = {
-                "userId": req.body.buyer_id,
-                "added": true,
-                "paymentId": req.body.txn_id,
-            };
+        let channelid = req.body.channelId;
+        if(channelid) {
+            let data = await fetch(process.env.DISCORD_API_URL + '/channels/' + channelid + '/messages?limit=100', {
+                method: 'get',
+                headers: { 'Authorization': process.env.DISCORD_BOT_TOKEN_STRING }
+            });
+            data = await data.json();
+            console.log(data)
+            res.status(200).send({messages: data})
+
         }
         else {
-            data = {
-                "userId": req.body.buyer_id,
-                "added": false,
-                "paymentId": req.body.txn_id,
-            };
+            res.status(400).send({msg: "Invalid channelId entered"});
         }
-        await redis.publish(process.env.DONATE_CHANNEL, JSON.stringify(data));
-        res.status(200).send({msg: "Done"})
     }
 }
