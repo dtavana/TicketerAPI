@@ -3,18 +3,16 @@ var pub = require('./publish');
 const utils = require('../utils/utils');
 const fetch = require('node-fetch');
 
+const MANAGE_GUILDS = 0x00000020
+
 require('dotenv').config();
 
 module.exports = {
     getGuilds: async(req, res) => {
         let userid = req.body.userId;
-        let key = utils.generateKey();
         if(userid) {
-            let key = utils.generateKey();
-            let data = {
-                "userId": userid,
-                "key": key
-            };
+            let filteredGuilds = req.user.guilds.filter(guild => (guild.permissions & MANAGE_GUILDS) == MANAGE_GUILDS)
+            res.status(200).send({guilds: filteredGuilds})
 
         }
         else {

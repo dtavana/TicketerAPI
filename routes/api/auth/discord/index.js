@@ -18,7 +18,8 @@ passport.deserializeUser(function(user, done) {
 passport.use(new DiscordStrategy({
     clientID: process.env.DISCORD_CLIENT_ID,
     clientSecret: process.env.DISCORD_CLIENT_SECRET,
-    callbackURL: "http://ticketerbot.xyz:3000/api/auth/discord/return",
+    //callbackURL: "http://ticketerbot.xyz:3000/api/auth/discord/return",
+    callbackURL: process.env.HOSTNAME + 3000 + process.env.DISCORD_CALLBACK,
     scope: scopes
   },
   function (accessToken, refreshToken, profile, cb) {

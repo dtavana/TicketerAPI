@@ -4,6 +4,8 @@ const utils = require('../../utils/utils')
 router.use('/settings', utils.ensureAuthenticated, require('./settings'));
 router.use('/auth', require('./auth'));
 router.use('/webhook', utils.checkSecret, require('./webhook'));
-router.use('/panelinfo', utils.ensureAuthenticated, require('./panelinfo'));
+//router.use('/guilds', utils.ensureAuthenticated, require('./guilds'));
+router.use('/guilds', require('./guilds'));
+router.use('/ticketcontent', utils.ensureAuthenticated, require('./ticketcontent'))
 
 module.exports = router;
