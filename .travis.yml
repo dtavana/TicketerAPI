@@ -8,6 +8,12 @@ services:
   
 before_script:
   - npm install
+  - psql -c 'CREATE DATABASE TicketerRewrite;' -U postgres
+  - psql -c 'CREATE TABLE IF NOT EXISTS servers(serverid varchar PRIMARY KEY, currentticket smallint DEFAULT 1, setup boolean DEFAULT FALSE, userid varchar);' -u postgres
+  - psql -c 'CREATE TABLE IF NOT EXISTS premium(userid varchar, serverid varchar, key varchar, enabled boolean DEFAULT FALSE, paymentid varchar DEFAULT 0);' -u postgres
+  - psql -c 'CREATE TABLE IF NOT EXISTS blacklist(userid varchar, serverid varchar);' -u postgres
+  - psql -c 'CREATE TABLE IF NOT EXISTS payments(userid varchar, paymentid varchar);' -u postgres
+  - psql -c 'CREATE TABLE IF NOT EXISTS votes(userid varchar PRIMARY KEY, count smallint);' -u postgres
 
 script:
   - npm run test
