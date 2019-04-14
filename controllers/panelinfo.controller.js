@@ -8,6 +8,21 @@ const MANAGE_GUILDS = 0x00000020
 require('dotenv').config();
 
 module.exports = {
+    getChannels: async(req, res) => {
+        let guildid = req.body.guildId;
+        if(guildid) {
+            let data = await fetch(process.env.DISCORD_API_URL + '/guilds/' + guildid + '/channels', {
+                method: 'get',
+                headers: { 'Authorization': process.env.DISCORD_BOT_TOKEN_STRING }
+            });
+            data = await data.json();
+            res.status(200).send({channels: data})
+
+        }
+        else {
+            res.status(400).send({msg: "Invalid guildId entered"});
+        }
+    },
     getGuilds: async(req, res) => {
         let userid = req.body.userId;
         if(userid) {
@@ -27,7 +42,6 @@ module.exports = {
                 headers: { 'Authorization': process.env.DISCORD_BOT_TOKEN_STRING }
             });
             data = await data.json();
-            console.log(data)
             res.status(200).send({messages: data})
 
         }
