@@ -12,7 +12,7 @@ module.exports = {
         if(settings === null || settings.length === 0) {
             return res.status(400).json({"ERROR": `No settings found for guildid: '${guildid}'`})
         }
-        return res.status(200).send(settings);
+        return res.status(200).send({"settings": settings});
     },
     setPrefix: async(req, res) => {
         let guildid = req.body.guildid;
