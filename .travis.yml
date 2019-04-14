@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - node
+  - "lts/*"
+services:
+  - postgresql
+  
+before_script:
+  - npm install
+
+script:
+  - npm run test-coverage
+
+after_failure:
+  - wget https://raw.githubusercontent.com/DiscordHooks/travis-ci-discord-webhook/master/send.sh
+  - chmod +x send.sh
+  - ./send.sh failure $WEBHOOK_URL
