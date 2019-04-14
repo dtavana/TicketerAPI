@@ -1,5 +1,6 @@
 var redis = require('./redis');
 var pg = require('./postgres');
+const _ = require('lodash');
 
 module.exports = {
     getAllSettings: async(req, res) => {
@@ -9,8 +10,8 @@ module.exports = {
         }
         
         let settings = await redis.hgetall(guildid)
-        if(settings === null || settings.length === 0) {
-            return res.status(400).json({"ERROR": `No settings found for guildid: '${guildid}'`})
+        if(settings === null || _.isEmpty(settings) === 0) {
+            settings = {};
         }
         return res.status(200).send({"settings": settings});
     },
