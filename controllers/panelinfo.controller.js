@@ -24,15 +24,24 @@ module.exports = {
         }
     },
     getGuilds: async(req, res) => {
-        let userid = req.body.userId;
-        if(userid) {
-            let filteredGuilds = req.user.guilds.filter(guild => (guild.permissions & MANAGE_GUILDS) == MANAGE_GUILDS)
-            res.status(200).send({guilds: filteredGuilds})
+        let filteredGuilds = req.user.guilds.filter(guild => (guild.permissions & MANAGE_GUILDS) == MANAGE_GUILDS)
+        res.status(200).send({guilds: filteredGuilds})
+    },
+    getRoles: async(req, res) => {
+        let guildid = req.body.guildId;
+        if(guildid) {
+            let data = await fetch(process.env.DISCORD_API_URL + '/guilds/' + guildid + '/roles', {
+                method: 'get',
+                headers: { 'Authorization': process.env.DISCORD_BOT_TOKEN_STRING }
+            });
+            data = await data.json();
+            res.status(200).send({roles: data})
 
         }
         else {
-            res.status(400).send({msg: "Invalid userId entered"});
+            res.status(400).send({msg: "Invalid guildId entered"});
         }
+
     },
     getTicketContent: async(req, res) => {
         let channelid = req.body.channelId;
