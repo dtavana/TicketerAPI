@@ -8,7 +8,6 @@ module.exports = {
         if(guildid === undefined) {
             return res.status(400).json({"ERROR": `No guildid in body`})
         }
-        
         let settings = await redis.hgetall(guildid)
         if(settings === null || _.isEmpty(settings) === 0) {
             settings = {};
@@ -24,15 +23,18 @@ module.exports = {
         if(prefix === undefined) {
             return res.status(400).json({"ERROR": `No desired prefix in body`})
         }
+        if(prefix.length > 5 || prefix.length == 0) {
+            return res.status(400).json({"ERROR": `Prefix must be between 0 and 5 characters`});
+        }
         let result = await redis.hset(guildid, "prefix", prefix)
         return res.status(200).json({"SUCCESS": `Prefix has been set to '${prefix}'`});
     },
     setCurrentTicket: async(req, res) => {
         let guildid = req.body.guildid;
         if(guildid === undefined) {
-            return res.status(400).json({"ERROR": `No guildid in body`})
+            return res.status(400).json({"ERROR": `No guildid in body`});
         }
-        await redis.hset(guildid, "currentticket", 0)
+        let result = await redis.hset(guildid, "currentticket", 0);
         return res.status(200).json({"SUCCESS": `Current Ticket has been set to '0'`});
     },
     setLogChannel: async(req, res) => {
@@ -92,6 +94,9 @@ module.exports = {
         if(ticketprefix === undefined) {
             return res.status(400).json({"ERROR": `No desired ticketprefix in body`})
         }
+        if(ticketprefix.length > 10 || ticketprefix.length == 0) {
+            return res.status(400).json({"ERROR": `Ticket prefix must be between 0 and 10 characters`});
+        }
         let result = await redis.hset(guildid, "ticketprefix", ticketprefix)
         return res.status(200).json({"SUCCESS": `Ticket prefix has been set to '${ticketprefix}'`});
     },
@@ -116,8 +121,14 @@ module.exports = {
         if(ticketcount === undefined) {
             return res.status(400).json({"ERROR": `No desired ticketcount in body`})
         }
-        let result = await redis.hset(guildid, "ticketcount", ticketcount)
-        return res.status(200).json({"SUCCESS": `Ticket count has been set to '${ticketcount}'`});
+        let result;
+        let ticketcountstr = ticketcount;
+        if(ticketcount == -1) {
+            ticketcount = false;
+            ticketcountstr = "Unlimited";
+        }
+        result = await redis.hset(guildid, "ticketcount", ticketcount)
+        return res.status(200).json({"SUCCESS": `Ticket count has been set to '${ticketcountstr}'`});
     },
     setWelcomeMessage: async(req, res) => {
         let guildid = req.body.guildid;
@@ -127,6 +138,9 @@ module.exports = {
         }
         if(welcomemessage === undefined) {
             return res.status(400).json({"ERROR": `No desired welcomemessage in body`})
+        }
+        if(welcomemessage.length > 2000 || welcomemessage.length == 0) {
+            return res.status(400).json({"ERROR": `Welcome message must be between 0 and 2000 characters`});
         }
         let result = await redis.hset(guildid, "welcomemessage", welcomemessage)
         return res.status(200).json({"SUCCESS": `Welcome message has been set to '${welcomemessage}'`});
@@ -235,6 +249,9 @@ module.exports = {
         }
         if(newmemberwelcomemessage === undefined) {
             return res.status(400).json({"ERROR": `No desired newmemberwelcomemessage in body`})
+        }
+        if(newmemberwelcomemessage.length > 2000 || newmemberwelcomemessage.length == 0) {
+            return res.status(400).json({"ERROR": `New Member Welcome Message must be between 0 and 2000 characters`});
         }
         let result = await redis.hset(guildid, "newmemberwelcomemessage", newmemberwelcomemessage)
         return res.status(200).json({"SUCCESS": `New Member Welcome Message has been set to '${newmemberwelcomemessage}'`});
