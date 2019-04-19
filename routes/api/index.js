@@ -8,5 +8,6 @@ router.use('/webhook', utils.checkSecret, require('./webhook'));
 router.use('/guilds', utils.ensureAuthenticated, require('./guilds'));
 router.use('/ticketcontent', utils.ensureAuthenticated, require('./ticketcontent'))
 router.use('/channels', utils.ensureAuthenticated, require('./channels'))
+router.use('/roles', utils.ensureAuthenticated, require('./roles'))
 
 module.exports = router;
