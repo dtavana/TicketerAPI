@@ -151,7 +151,32 @@
             <label for="">New member welcome message</label>
             <textarea class="form-control" name="" id="" rows="3"></textarea>
         </div>
+
+
+        <button id="save-button" type="button" class="btn btn-primary">Save</button>
     </div>
 </body>
+
+<script>
+
+    $(document).ready(() => {
+        const guildid = '123456789'
+        $("#save-button").click(e => {
+            const prefix = $("#prefix").val();
+
+            const result = $.post("/api/settings/prefix", { prefix, guildid })
+                .done(() => {
+                    console.log('success')
+                })
+                .fail((e) => {
+                    console.error(e.responseText)
+                }).always(function () {
+                    console.log('Finished')
+                });
+        });
+
+    })
+
+</script>
 
 </html>
