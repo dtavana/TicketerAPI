@@ -159,12 +159,26 @@
 
 <script>
 
+    const guildid = '123456789'
     $(document).ready(() => {
-        const guildid = '123456789'
+
         $("#save-button").click(e => {
             const prefix = $("#prefix").val();
+            const transcripts = $("#transcripts").is(':checked');
 
-            const result = $.post("/api/settings/prefix", { prefix, guildid })
+            postDataField('prefix', prefix);
+            postDataField('transcripts', transcripts);
+
+        });
+
+        function postDataField(name, value) {
+
+            const postData = {
+                guildid
+            }
+            postData[name] = value;
+
+            $.post("/api/settings/" + name, postData)
                 .done(() => {
                     console.log('success')
                 })
@@ -173,9 +187,9 @@
                 }).always(function () {
                     console.log('Finished')
                 });
-        });
+        }
+    });
 
-    })
 
 </script>
 
