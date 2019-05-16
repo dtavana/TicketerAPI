@@ -1,0 +1,47 @@
+<div>
+
+    <div class="row">
+        <div class="form-group">
+            <select class="form-control" name="activeGuild" id="activeGuild">
+            </select>
+        </div>
+        <img id="activeGuildIcon" src="" alt="Guild icon" width="25%">
+    </div>
+
+
+</div>
+
+
+<script>
+
+    $(document).ready(() => {
+
+        $.getJSON('/api/guilds', data => {
+            for (const guild of data.guilds) {
+                $("#activeGuild").append(`<option value="${guild.id}">${guild.name}</option>`);
+                $(`#activeGuild option[value="${guild.id}"]`).data('guild', guild);
+            }
+        }).fail(() => {
+            console.log('Error getting guilds')
+        }).always(() => {
+            setSelectedGuildImage($("#activeGuild option:selected").data('guild'))
+        });
+
+        $("#activeGuild").change(e => {
+            setSelectedGuildImage($("#activeGuild option:selected").data('guild'))
+        });
+
+    });
+
+    function setSelectedGuildImage(guild) {
+        $("#activeGuildIcon").attr('src', `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`);
+    }
+
+</script>
+
+
+<style>
+    img {
+        border-radius: 50%;
+    }
+</style>

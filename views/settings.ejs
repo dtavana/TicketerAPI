@@ -8,13 +8,15 @@
 <body>
     <% include ./includes/navbar %>
     <div class="container ">
-        <h1>Guild name</h1>
+
+        <h1>Settings</h1>
 
         <div class="form-group">
             <label for="prefix">Prefix</label>
             <input type="text" class="form-control" name="prefix" id="prefix" aria-describedby="prefix-help"
                 placeholder="">
-            <small id="prefix-help" class="form-text text-muted">The character(s) you put before a message for the bot
+            <small id="prefix-help" class="form-text text-muted">The character(s) you put before a message for
+                the bot
                 to respond</small>
         </div>
 
@@ -81,7 +83,8 @@
                 <option></option>
                 <option></option>
             </select>
-            <small id="logchannel-help" class="form-text text-muted">Channel with log info about created and closed
+            <small id="logchannel-help" class="form-text text-muted">Channel with log info about created and
+                closed
                 tickets</small>
         </div>
 
@@ -93,7 +96,8 @@
                 <option></option>
                 <option></option>
             </select>
-            <small id="transcript-channel-help" class="form-text text-muted">Channel where ticket transcripts are
+            <small id="transcript-channel-help" class="form-text text-muted">Channel where ticket transcripts
+                are
                 sent</small>
         </div>
 
@@ -119,7 +123,8 @@
             <label for="ticket-prefix">Ticket Prefix</label>
             <input type="text" class="form-control" name="ticket-prefix" id="ticket-prefix"
                 aria-describedby="ticket-prefix-help" placeholder="">
-            <small id="ticket-prefix-help" class="form-text text-muted">Not sure what the difference is with prefix but
+            <small id="ticket-prefix-help" class="form-text text-muted">Not sure what the difference is with
+                prefix but
                 you can set something here :)</small>
         </div>
 
@@ -136,7 +141,8 @@
             <label for="ticket-count">Ticket Count</label>
             <input type="text" class="form-control" name="ticket-count" id="ticket-count"
                 aria-describedby="ticket-count-help" placeholder="">
-            <small id="ticket-count-help" class="form-text text-muted">Maximum number of tickets a user can have open at
+            <small id="ticket-count-help" class="form-text text-muted">Maximum number of tickets a user can have
+                open at
                 any point</small>
         </div>
 
@@ -155,11 +161,11 @@
 
         <button id="save-button" type="button" class="btn btn-primary">Save</button>
     </div>
+    </div>
 </body>
 
 <script>
 
-    const guildid = '123456789'
     $(document).ready(() => {
 
         $("#save-button").click(e => {
@@ -172,7 +178,7 @@
         });
 
         function postDataField(name, value) {
-
+            const guildid = $("#activeGuild option:selected").val();
             const postData = {
                 guildid
             }
