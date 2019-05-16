@@ -9,7 +9,7 @@ require('dotenv').config();
 
 module.exports = {
     getChannels: async (req, res) => {
-        let guildid = req.body.guildId;
+        let guildid = req.query.guildId;
         if (guildid) {
             let data = await fetch(process.env.DISCORD_API_URL + '/guilds/' + guildid + '/channels', {
                 method: 'get',

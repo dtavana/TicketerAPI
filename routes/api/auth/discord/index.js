@@ -32,7 +32,7 @@ router.get('/return', passport.authenticate('discord', {
   failureRedirect: '/api/auth/discord'
 }),
   function (req, res, next) {
-    res.redirect('/panel')
+    res.redirect('/settings')
   }
 );
 
