@@ -34,6 +34,10 @@
     });
 
     function setSelectedGuildImage(guild) {
+        console.log(guild);
+        if(!guild.icon) {
+            $("#activeGuildIcon").attr('src', `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`);
+        }
         $("#activeGuildIcon").attr('src', `https://cdn.discordapp.com/icons/${guild.id}/${guild.icon}`);
     }
 
@@ -43,5 +47,7 @@
 <style>
     img {
         border-radius: 50%;
+        width: 64px;
+        height: 64px;
     }
 </style>
