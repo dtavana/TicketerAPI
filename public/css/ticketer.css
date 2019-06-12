@@ -1,3 +1,11 @@
+.dashboard {
+    background: #696969;
+}
+
+.form-text.text-muted {
+    color: white
+}
+
 .nav-item a {
     color: white
 }

@@ -17,7 +17,8 @@ module.exports = {
         }
     },
     handlePremium: async(req, res) => {
-        var data;
+        console.log("got here");
+        let data;
         if(req.body.status == "completed") {
             data = {
                 "userId": req.body.buyer_id,

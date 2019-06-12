@@ -5,6 +5,7 @@ const utils = require('../../utils/utils');
 
 
 router.get('/', pages.home)
-router.get('/dashboard', utils.ensureAuthenticated, pages.dashboard)
+//router.get('/dashboard', utils.ensureAuthenticated, pages.dashboard)
+router.get('/dashboard', pages.dashboard)
 
 module.exports = router
