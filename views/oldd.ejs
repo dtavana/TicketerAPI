@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ./includes/head %>
+</head>
+
+<body>
+    <% include ./includes/guildNavbar %>
+    <div class="dashboard">
+
+        <h1>Dashboard</h1>
+
+        <div class="form-group">
+            <label for="prefix">Prefix</label>
+            <input type="text" class="form-control" name="prefix" id="prefix" aria-describedby="prefix-help"
+                placeholder="">
+            <small id="prefix-help" class="form-text text-muted">The character(s) you put before a message for
+                the bot
+                to respond</small>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="transcripts" id="transcripts" value="true">
+                Transcripts
+            </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="clean-new" id="clean-new" value="true">
+                Clean new
+            </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="clean-all" id="clean-all" value="true">
+                Clean all
+            </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="steam-auth" id="steam-auth" value="true">
+                Require users to authenticate with Steam when making a ticket
+            </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="admin-close" id="admin-close" value="true">
+                Only admins can close a ticket
+            </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="dm-join" id="dm-join" value="true">
+                Send a DM to users that join the guild on how to create a ticket
+            </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="enfore-subject" id="enfore-subject" value="true">
+                Require users to provide a subject when creating a ticket
+            </label>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" name="ticket-onjoin" id="ticket-onjoin" value="true">
+                Ticket on join
+            </label>
+        </div>
+
+        <div class="form-group">
+            <label for="log-channel">Log channel</label>
+            <select class="form-control" name="log-channel" id="log-channel" aria-describedby="logchannel-help">
+            </select>
+            <small id="logchannel-help" class="form-text text-muted">Channel with log info about created and
+                closed
+                tickets</small>
+        </div>
+
+        <div class="form-group">
+            <label for="transcript-channel">Transcript channel</label>
+            <select class="form-control" name="transcript-channel" id="transcript-channel"
+                aria-describedby="transcript-channel-help">
+            </select>
+            <small id="transcript-channel-help" class="form-text text-muted">Channel where ticket transcripts
+                are
+                sent</small>
+        </div>
+
+        <div class="form-group">
+            <label for="ticket-channel">Ticket channel</label>
+            <select class="form-control" name="ticket-channel" id="ticket-channel">
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="ticket-category">Ticket category</label>
+            <select class="form-control" name="ticket-category" id="ticket-category">
+                <option></option>
+                <option></option>
+                <option></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="ticket-prefix">Ticket Prefix</label>
+            <input type="text" class="form-control" name="ticket-prefix" id="ticket-prefix"
+                aria-describedby="ticket-prefix-help" placeholder="">
+            <small id="ticket-prefix-help" class="form-text text-muted">Not sure what the difference is with
+                prefix but
+                you can set something here :)</small>
+        </div>
+
+        <div class="form-group">
+            <label for="admin-role">Admin role</label>
+            <select class="form-control" name="admin-role" id="admin-role">
+                <option></option>
+                <option></option>
+                <option></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="ticket-count">Ticket Count</label>
+            <input type="text" class="form-control" name="ticket-count" id="ticket-count"
+                aria-describedby="ticket-count-help" placeholder="">
+            <small id="ticket-count-help" class="form-text text-muted">Maximum number of tickets a user can have
+                open at
+                any point</small>
+        </div>
+
+        <div class="form-group">
+            <label for="">Welcome message</label>
+            <textarea class="form-control" name="" id="" rows="3"></textarea>
+        </div>
+
+
+
+        <div class="form-group">
+            <label for="">New member welcome message</label>
+            <textarea class="form-control" name="" id="" rows="3"></textarea>
+        </div>
+
+
+        <button id="save-button" type="button" class="btn btn-primary">Save</button>
+    </div>
+    </div>
+</body>
+
+<script src="scripts/dashboard.js"></script>
+
+</html>
